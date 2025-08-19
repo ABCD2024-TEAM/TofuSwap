@@ -11,7 +11,7 @@ def create_menu_panel(parent, switch_callback):
     frame = tk.Frame(parent, bg="#f7f2e7")
 
     title_label = tk.Label(frame, text="TofuSwap",
-                           font=("Segoe UI", 20, "bold"),
+                           font=("Segoe UI", 40, "bold"),
                            fg="#2e7d32", bg="#f7f2e7")
     title_label.pack(pady=20)
 
@@ -28,6 +28,20 @@ def create_menu_panel(parent, switch_callback):
         command=lambda: switch_callback("similar")
     )
     similar_button.pack(pady=10);
+
+    save_button = ttk.Button(
+        frame,
+        text="Saved Foods",
+        command=lambda: switch_callback("save")
+    )
+    save_button.pack(pady=10);
+
+    credits_button = ttk.Button(
+        frame,
+        text="Credits",
+        command=lambda: switch_callback("credits")
+    )
+    credits_button.pack(pady=10);
 
     # Add new scenes here
 

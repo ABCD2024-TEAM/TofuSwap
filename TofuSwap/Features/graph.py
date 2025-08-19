@@ -8,11 +8,12 @@ def create_graph_panel(parent, switch_callback):
     :param parent: parent widget (usually container frame)
     :param switch_callback: function to call with target scene name
     """
-    frame = tk.Frame(parent, bg="#ffffff")
+    frame = tk.Frame(parent, bg="#f7f2e7")
 
-    tk.Label(frame, text="Graph Visualization",
-             font=("Segoe UI", 16, "bold"),
-             bg="#ffffff").pack(pady=10)
+    title = tk.Label(frame, text="Graph Visualization",
+             font=("Segoe UI", 40, "bold"),
+             bg="#f7f2e7")
+    title.pack(pady=10)
 
     back_btn = ttk.Button(frame, text="Back to Menu",
                           command=lambda: switch_callback("menu"))
