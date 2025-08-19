@@ -1,9 +1,11 @@
 import pandas as pd
 import tkinter as tk
 from tkinter import Listbox, Entry, END, Label
+import os
+from Features import importDataset;
 
 # Read CSV
-df = pd.read_csv('../Dataset/dish.csv')
+df = importDataset.getDataset();
 first_column = df.iloc[:, 0].astype(str).tolist()
 
 def search(event):
@@ -53,4 +55,4 @@ detail_label.pack()
 for item in first_column:
     listbox.insert(END, item)
 
-root.mainloop()
+# root.mainloop()
