@@ -9,3 +9,5 @@ A Windows application that provides information about dishes mainly about Canton
 - Able to find similar items within Cantonese cuisine
 - Can like items, and will recommend items based on the similarity of the items
 
+## How to contribute?
+Read `contribution.md`
