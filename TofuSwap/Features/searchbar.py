@@ -3,7 +3,7 @@ import tkinter as tk
 from tkinter import Listbox, Entry, END, Label
 
 # Read CSV
-df = pd.read_csv('dish.csv')
+df = pd.read_csv('../Dataset/dish.csv')
 first_column = df.iloc[:, 0].astype(str).tolist()
 
 def search(event):
