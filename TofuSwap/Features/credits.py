@@ -29,7 +29,7 @@ def create_credits_panel(parent, switch_callback):
                      bg="#f7f2e7").pack(pady=10);
     make_link(frame, "github.com/iceheart-ac", "github.com/iceheart-ac");
     
-    tk.Label(frame, text="CHOI Kui Wang", 
+    tk.Label(frame, text="CHOI Kui Wang, Joshua", 
                      font=("Segoe UI", 20), 
                      bg="#f7f2e7").pack(pady=10);
     make_link(frame, "github.com/joshuaSYSS", "github.com/joshuaSYSS");
