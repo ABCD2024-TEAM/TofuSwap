@@ -28,11 +28,11 @@ def create_similar_panel(parent, switch_callback):
     input_frame = tk.Frame(frame, bg="#f7f2e7")
     input_frame.pack(pady=10)
 
-    entry = Entry(frame, width=40)
+    entry = Entry(frame, width=100)
     entry.pack()
     entry.bind('<KeyRelease>', search)
     
-    listbox = Listbox(frame, width=40)
+    listbox = Listbox(frame, width=100)
     listbox.pack()
     listbox.bind('<<ListboxSelect>>', show_details)
     
@@ -41,12 +41,19 @@ def create_similar_panel(parent, switch_callback):
     
     for item in first_column:
         listbox.insert(END, item)
+        
+    find_similar_btn = ttk.Button(frame, text="Find Similar", command=lambda: show_similar())
+    find_similar_btn.pack(pady=10)
 
     back_btn = ttk.Button(frame, text="Back to Menu",
                           command=lambda: switch_callback("menu"))
     back_btn.pack(pady=10)
 
     return frame
+
+def show_similar():
+    
+    return;
 
 def search(event):
     query = entry.get().lower()
