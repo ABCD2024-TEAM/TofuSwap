@@ -4,10 +4,12 @@ import pandas as pd
 from tkinter import ttk, messagebox
 from tkinter import Listbox, Entry, END, Label
 from Features import importDataset
+from itertools import combinations
 
 frame = None;
 df = importDataset.getDataset();
 first_column = df.iloc[:, 0].astype(str).tolist()
+attributes = df.iloc[:, 1:]
 
 def create_similar_panel(parent, switch_callback):
     """
@@ -51,8 +53,42 @@ def create_similar_panel(parent, switch_callback):
 
     return frame
 
-def show_similar():
+def jaccard_similarity(r1, r2):
+    intersection = 0
+    union = 0
     
+    row1 = r1;
+    row2 = r2;
+
+    # Outer loop over attribute positions
+    for i in range(len(row1)):
+        union += 1;
+        hassame = False;
+        for j in range(len(row2)):
+            a = row1[i]
+            b = row2[j]
+            if a == b:
+                intersection += 1;
+                b = None;
+                hassame = True;
+                break;
+        if not hassame:
+            union += 1;
+    return intersection / union if union else 0
+
+def show_similar(event=None):
+    selection = listbox.curselection()
+    if selection:
+        selected_value = listbox.get(selection[0])
+        row_index = df.index[df.iloc[:, 0].astype(str) == selected_value].tolist()[0]
+        similarities = []
+        for i in range(len(df)):
+            if i != row_index:
+                sim = jaccard_similarity(attributes.iloc[row_index].tolist(), attributes.iloc[i].tolist())
+                similarities.append((df.iloc[i, 0], sim))
+        similarities.sort(key=lambda x: x[1], reverse=True)
+        top_similar = [f"{name} (Similarity: {sim:.2f})" for name, sim in similarities[:5]]
+        messagebox.showinfo("Similar Foods", "\n".join(top_similar))
     return;
 
 def search(event):
