@@ -53,6 +53,15 @@ def create_similar_panel(parent, switch_callback):
 
     return frame
 
+def open_new_window(top_similar):
+    win = tk.Toplevel()
+    win.title("Windows")
+    win.geometry("500x400")
+    label = tk.Label(win, text=f"");
+    label.pack(padx=20, pady=20);
+    for x in top_similar:
+        label.config(text=f"{label.cget("text") + x + "\n"}")
+
 def jaccard_similarity(r1, r2):
     intersection = 0
     union = 0
@@ -88,7 +97,7 @@ def show_similar(event=None):
                 similarities.append((df.iloc[i, 0], sim))
         similarities.sort(key=lambda x: x[1], reverse=True)
         top_similar = [f"{name} (Similarity: {sim:.2f})" for name, sim in similarities[:5]]
-        messagebox.showinfo("Similar Foods", "\n".join(top_similar))
+        open_new_window(top_similar)
     return;
 
 def search(event):
