@@ -1,7 +1,6 @@
 import pandas as pd
 import tkinter as tk
 from tkinter import Listbox, Entry, END, Label
-import os
 from Features import importDataset;
 
 # Read CSV
@@ -38,21 +37,25 @@ def show_details(event):
                 details += f"\n顔色: {col9}"
             detail_label.config(text=f"{details}")
 
-root = tk.Tk()
-root.title("Search CSV First Column")
+def run():
+    global root
+    global entry, listbox, detail_label
+    root = tk.Tk()
+    root.title("Search CSV First Column")
+    
+    entry = Entry(root, width=40)
+    entry.pack()
+    entry.bind('<KeyRelease>', search)
+    
+    listbox = Listbox(root, width=40)
+    listbox.pack()
+    listbox.bind('<<ListboxSelect>>', show_details)
+    
+    detail_label = Label(root, text="", wraplength=300)
+    detail_label.pack()
+    
+    for item in first_column:
+        listbox.insert(END, item)
+    
+    root.mainloop()
 
-entry = Entry(root, width=40)
-entry.pack()
-entry.bind('<KeyRelease>', search)
-
-listbox = Listbox(root, width=40)
-listbox.pack()
-listbox.bind('<<ListboxSelect>>', show_details)
-
-detail_label = Label(root, text="", wraplength=300)
-detail_label.pack()
-
-for item in first_column:
-    listbox.insert(END, item)
-
-# root.mainloop()
