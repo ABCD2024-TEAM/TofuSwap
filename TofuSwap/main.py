@@ -1,7 +1,7 @@
 # Main Code
 import tkinter as tk
 from tkinter import ttk, messagebox
-from Features import credits, graph, importDataset, menu, recommend, save, searchbar, similar, stats;
+from Features import credits, graph, importDataset, menu, recommend, save, searchbar, similar, stats
 
 class TofuSwapApp(tk.Tk):
 

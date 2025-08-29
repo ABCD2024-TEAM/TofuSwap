@@ -53,14 +53,70 @@ def create_similar_panel(parent, switch_callback):
 
     return frame
 
+
 def open_new_window(top_similar):
     win = tk.Toplevel()
-    win.title("Windows")
-    win.geometry("500x400")
-    label = tk.Label(win, text=f"");
-    label.pack(padx=20, pady=20);
-    for x in top_similar:
-        label.config(text=f"{label.cget("text") + x + "\n"}")
+    win.title("Similar Foods")
+    win.geometry("800x450")
+
+    # Main container: Canvas + Scrollbar + Frame inside Canvas
+    container = ttk.Frame(win)
+    container.pack(fill=tk.BOTH, expand=True)
+
+    canvas = tk.Canvas(container)
+    scrollbar = ttk.Scrollbar(container, orient="vertical", command=canvas.yview)
+    scrollable_frame = ttk.Frame(canvas)
+
+    # Make the frame resize properly inside the canvas
+    scrollable_frame.bind(
+        "<Configure>",
+        lambda e: canvas.configure(
+            scrollregion=canvas.bbox("all")  # update scrollable area
+        )
+    )
+
+    # Put the frame in the canvas
+    window_id = canvas.create_window((0, 0), window=scrollable_frame, anchor="nw")
+
+    # Link scrollbar to canvas
+    canvas.configure(yscrollcommand=scrollbar.set)
+
+    # Layout canvas and scrollbar
+    canvas.pack(side=tk.LEFT, fill=tk.BOTH, expand=True)
+    scrollbar.pack(side=tk.RIGHT, fill=tk.Y)
+
+    # Populate with your name + details
+    for name, sim in top_similar:
+        row = df[df.iloc[:, 0].astype(str) == name]
+        if not row.empty:
+            cols_2_7 = [str(val) for val in row.iloc[0, 1:7] if pd.notna(val)]
+            line1 = ", ".join(cols_2_7)
+            col8 = str(row.iloc[0, 7]) if pd.notna(row.iloc[0, 7]) else ""
+            col9 = str(row.iloc[0, 8]) if pd.notna(row.iloc[0, 8]) else ""
+            details = "材料: " + line1
+            if col8:
+                details += f"\n烹調方式: {col8}"
+            if col9:
+                details += f"\n顔色: {col9}"
+
+            tk.Label(scrollable_frame, text=name,
+                     font=("Segoe UI", 30, "bold"), anchor="w",
+                     justify="left", wraplength=480).pack(
+                         pady=10, padx=10, fill=tk.X
+                     )
+            tk.Label(scrollable_frame, text=details,
+                     font=("Segoe UI", 15), anchor="w",
+                     justify="left", wraplength=480).pack(
+                         pady=5, padx=20, fill=tk.X
+                     )
+
+    # Optional: Enable mousewheel scrolling on Windows/Mac
+    def _on_mousewheel(event):
+        canvas.yview_scroll(int(-1*(event.delta/120)), "units")
+
+    canvas.bind_all("<MouseWheel>", _on_mousewheel)      # Windows/macOS
+    canvas.bind_all("<Button-4>", lambda e: canvas.yview_scroll(-1, "units"))  # Linux up
+    canvas.bind_all("<Button-5>", lambda e: canvas.yview_scroll(1, "units"))   # Linux down
 
 def jaccard_similarity(r1, r2):
     intersection = 0
@@ -96,7 +152,7 @@ def show_similar(event=None):
                 sim = jaccard_similarity(attributes.iloc[row_index].tolist(), attributes.iloc[i].tolist())
                 similarities.append((df.iloc[i, 0], sim))
         similarities.sort(key=lambda x: x[1], reverse=True)
-        top_similar = [f"{name} (Similarity: {sim:.2f})" for name, sim in similarities[:5]]
+        top_similar = similarities[:5]
         open_new_window(top_similar)
     return;
 
