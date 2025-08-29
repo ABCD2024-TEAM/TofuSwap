@@ -10,10 +10,12 @@ def create_save_panel(parent, switch_callback):
     """
     frame = tk.Frame(parent, bg="#f7f2e7")
 
-    title = tk.Label(frame, text="Save",
+    title = tk.Label(frame, text="List of Saved Dishes",
              font=("Segoe UI", 40, "bold"),
              bg="#f7f2e7")
     title.pack(pady=10)
+
+    
 
     back_btn = ttk.Button(frame, text="Back to Menu",
                           command=lambda: switch_callback("menu"))
