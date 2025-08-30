@@ -1,7 +1,8 @@
 # Main Code
 import tkinter as tk
 from tkinter import ttk, messagebox
-from Features import credits, graph, importDataset, menu, recommend, save, searchbar, similar, stats
+from Features import credits, graph, importDataset, menu, recommend, searchbar, similar, stats
+from Features.Save import save, viewSaved, recommend
 
 class TofuSwapApp(tk.Tk):
 
@@ -24,6 +25,9 @@ class TofuSwapApp(tk.Tk):
         self.frames["similar"] = similar.create_similar_panel(container, self.show_frame);
         self.frames["save"] = save.create_save_panel(container, self.show_frame);
         self.frames["credits"] = credits.create_credits_panel(container, self.show_frame);
+        self.frames["stats"] = stats.create_stats_panel(container, self.show_frame);
+        self.frames["viewSaved"] = viewSaved.create_viewSaved_panel(container, self.show_frame);
+        self.frames["recommend"] = recommend.create_recommendation_panel(container, self.show_frame);
 
         # Add new scenes here
 
