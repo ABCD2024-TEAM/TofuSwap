@@ -11,3 +11,9 @@ A Windows application that provides information about dishes mainly about Canton
 
 ## How to contribute?
 Read `contribution.md`
+
+## Credits
+- CHENG Po Hei
+  > [github.com/iceheart-ac](github.com/iceheart-ac)
+- CHOI Kui Wang, Joshua
+  > [github.com/joshuaSYSS](github.com/joshuaSYSS)
