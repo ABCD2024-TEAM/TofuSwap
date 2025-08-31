@@ -6,6 +6,7 @@ import os
 df = importDataset.getDataset()
 saved_dishes = []
 base_dir = os.path.dirname(os.path.abspath(__file__))
+list_file_path = os.path.join(base_dir, "savedDishes", "list.txt")
 
 def create_save_panel(parent, switch_callback):
     frame = tk.Frame(parent, bg="#f7f2e7")
@@ -33,8 +34,8 @@ def create_save_panel(parent, switch_callback):
         tree.insert("", tk.END, values=(dish_name))
 
     tree.pack(pady=10)
-
-    list_file_path = os.path.join(base_dir, "savedDishes", "list.txt")
+    
+    
 
     # Save button
     def save_selected():
@@ -47,7 +48,7 @@ def create_save_panel(parent, switch_callback):
             if dish_name not in saved_dishes:
                 saved_dishes.append(dish_name)
                 
-                # Example: append content instead of overwriting
+                # Append content instead of overwriting
                 with open(list_file_path, "a", encoding="utf-8") as f:
                     f.write(dish_name + "\n");
         messagebox.showinfo("Saved", f"Saved {len(selected)} dish(es).")

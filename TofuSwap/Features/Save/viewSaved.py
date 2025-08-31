@@ -5,6 +5,8 @@ import os
 
 df = importDataset.getDataset()
 base_dir = os.path.dirname(os.path.abspath(__file__))
+list_file_path = os.path.join(base_dir, "savedDishes", "list.txt")
+saved_dishes = []
 
 def create_viewSaved_panel(parent, switch_callback):
     """
