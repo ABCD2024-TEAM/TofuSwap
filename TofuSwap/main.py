@@ -14,9 +14,10 @@ class TofuSwapApp(tk.Tk):
         self.configure(bg="#f7f2e7")
 
         # Container to hold all panels
+        global container
         container = tk.Frame(self, bg="#f7f2e7")
         container.pack(fill="both", expand=True)
-
+        
         self.frames = {}
 
         # Pass self.show_frame as switch_callback to scenes
@@ -28,7 +29,6 @@ class TofuSwapApp(tk.Tk):
         self.frames["stats"] = stats.create_stats_panel(container, self.show_frame);
         self.frames["viewSaved"] = viewSaved.create_viewSaved_panel(container, self.show_frame);
         self.frames["recommend"] = recommend.create_recommendation_panel(container, self.show_frame);
-
         # Add new scenes here
 
         # Stack all frames in same spot
@@ -40,11 +40,13 @@ class TofuSwapApp(tk.Tk):
     def show_frame(self, name):
         """Bring a frame to the front"""
         frame = self.frames[name]
+        if hasattr(frame, "refresh"):
+            frame.refresh()
         frame.tkraise()
 
 
 
 if __name__ == "__main__":
     app = TofuSwapApp()
-    app.state("zoomed"); #Start maximized
+    app.state("zoomed"); # Start maximized
     app.mainloop()
