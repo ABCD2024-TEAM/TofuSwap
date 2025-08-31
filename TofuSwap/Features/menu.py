@@ -1,48 +1,92 @@
-# Menu
 import tkinter as tk
 from tkinter import ttk
+import os
+
+base_dir = os.path.dirname(os.path.abspath(__file__))
+graph_file_path = os.path.join(base_dir, "../Images", "graph.png")
+search_file_path = os.path.join(base_dir, "../Images", "search.png")
+save_file_path = os.path.join(base_dir, "../Images", "save.png")
+info_file_path = os.path.join(base_dir, "../Images", "info.png")
 
 def create_menu_panel(parent, switch_callback):
-    """
-    Creates the Menu panel UI.
-    :param parent: parent widget (usually container frame)
-    :param switch_callback: function to call with target scene name
-    """
-    frame = tk.Frame(parent, bg="#f7f2e7")
+    # Colors
+    BG_COLOR = "#f7f2e7"
+    ACCENT_COLOR = "#2e7d32"
+    BTN_BG = "#4caf50"
+    BTN_FG = "white"
+    BTN_HOVER = "#45a049"
+
+    frame = tk.Frame(parent, bg=BG_COLOR)
+
+    # ttk style
+    style = ttk.Style()
+    style.theme_use("clam")
+    style.configure(
+        "Modern.TButton",
+        font=("Segoe UI", 14, "bold"),
+        padding=(14, 8),   # add left padding so content isn't glued to the edge
+        background=BTN_BG,
+        foreground=BTN_FG,
+        borderwidth=0
+    )
+    style.map(
+        "Modern.TButton",
+        background=[("active", BTN_HOVER)],
+        foreground=[("active", "white")]
+    )
+    # Critical: left-align the internal label element
+    style.layout(
+        "Modern.TButton",
+        [
+            ("Button.padding", {
+                "sticky": "nswe",
+                "children": [
+                    ("Button.label", {"sticky": "w"})   # pin to left
+                ]
+            })
+        ]
+    )
+
+    # Title with closer shadow
+    shadow = tk.Label(frame, text="TofuSwap",
+                      font=("Segoe UI", 40, "bold"),
+                      fg="gray80", bg=BG_COLOR)
+    shadow.place(x=3, y=33)
 
     title_label = tk.Label(frame, text="TofuSwap",
                            font=("Segoe UI", 40, "bold"),
-                           fg="#2e7d32", bg="#f7f2e7")
-    title_label.pack(pady=20)
+                           fg=ACCENT_COLOR, bg=BG_COLOR)
+    title_label.pack(pady=(40, 20))
 
-    visualization_button = ttk.Button(
-        frame,
-        text="Create Visualization of Ingredients",
-        command=lambda: switch_callback("graph")
-    )
-    visualization_button.pack(pady=10)
+    # Load icons (subsample to taste; try 2–4 for typical sizes)
+    icons = {
+        "graph": tk.PhotoImage(file=graph_file_path).subsample(16, 16),
+        "similar": tk.PhotoImage(file=search_file_path).subsample(16, 16),
+        "save": tk.PhotoImage(file=save_file_path).subsample(16, 16),
+        "credits": tk.PhotoImage(file=info_file_path).subsample(16, 16),
+    }
 
-    similar_button = ttk.Button(
-        frame,
-        text="Finding Similar Foods",
-        command=lambda: switch_callback("similar")
-    )
-    similar_button.pack(pady=10);
+    # Buttons with icons
+    buttons = [
+        ("Create Visualization of Ingredients", "graph"),
+        ("Finding Similar Foods", "similar"),
+        ("Saved Foods", "save"),
+        ("Credits", "credits")
+    ]
 
-    save_button = ttk.Button(
-        frame,
-        text="Saved Foods",
-        command=lambda: switch_callback("save")
-    )
-    save_button.pack(pady=10);
+    for text, target in buttons:
+        btn = ttk.Button(
+            frame,
+            text=text,
+            style="Modern.TButton",
+            image=icons[target],
+            compound="left",              # icon on the left of text
+            command=lambda t=target: switch_callback(t),
+            width=28                      # consistent width; content now left-aligned
+        )
+        btn.pack(pady=6)                  # keep buttons centered; content is left-aligned inside
 
-    credits_button = ttk.Button(
-        frame,
-        text="Credits",
-        command=lambda: switch_callback("credits")
-    )
-    credits_button.pack(pady=10);
-
-    # Add new scenes here
+    # Prevent images from being GC'd
+    frame.icons = icons
 
     return frame
