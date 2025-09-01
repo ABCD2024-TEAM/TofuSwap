@@ -13,7 +13,7 @@ def create_recommendation_panel(parent, switch_callback):
     """
     Creates the Recommendation panel UI.
     :param parent: parent widget (usually container frame)
-    :param switch_callback: function to call with target scene name
+    :param switch_callback: function to call with target scene name 
     """
     frame = tk.Frame(parent, bg="#f7f2e7")
 
