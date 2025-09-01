@@ -10,4 +10,4 @@ Whether you’re fixing a typo, adding a feature, or improving documentation, yo
 
 2. **Clone your fork**
    ```bash
-   git clone(https://github.com/ABCD2024-TEAM/TofuSwap.git
+   git clone https://github.com/ABCD2024-TEAM/TofuSwap.git
