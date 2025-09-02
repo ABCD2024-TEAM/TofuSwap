@@ -9,6 +9,10 @@ A Windows application that provides information about dishes mainly about Canton
 - Able to find similar items within Cantonese cuisine
 - Can like items, and will recommend items based on the similarity of the items
 
+## Technical Features
+- Applied a hybrid approach for similarity, using weighted Jaccard similarity and embedding-based similarity
+- Used Python Sentence Transformers, which includes Tensorflow and Keras
+
 ## How to contribute?
 Read `contribution.md`
 
