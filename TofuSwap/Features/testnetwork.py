@@ -6,6 +6,11 @@ import itertools
 import numpy as np
 from matplotlib import font_manager
 from Features.importDataset import getDataset
+import os
+
+from matplotlib import font_manager
+my_font = font_manager.FontProperties(fname=os.path.join(os.path.dirname(os.path.abspath(__file__)), "../fonts/simhei.ttf"))
+
 def visualize_network():
     df = getDataset()
     # Create a list of all ingredients
@@ -44,7 +49,7 @@ def visualize_network():
     # Create a graph
     G = nx.Graph()
 
-    plt.rcParams['font.family'] = 'SimHei' 
+    plt.rcParams['font.family'] = ["SimHei"]
     plt.rcParams['axes.unicode_minus'] = False #title chinese font
 
     # Add nodes (ingredients)
@@ -81,7 +86,7 @@ def visualize_network():
 
     nx.draw_networkx_labels(G, pos, 
                             font_size=12,
-                            font_family='SimHei',
+                            font_family=["SimHei"],
                             ax = ax)  # Use a font that supports Chinese characters
 
     ax.set_title('各項材料的親密程度 Closeness of each ingredient', fontsize=20)
