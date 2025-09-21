@@ -34,7 +34,7 @@ def create_credits_panel(parent, switch_callback):
                      bg="#f7f2e7").pack(pady=10);
     make_link(frame, "github.com/joshuaSYSS", "github.com/joshuaSYSS");
 
-    back_btn = ttk.Button(frame, text="Back to Menu",
+    back_btn = ttk.Button(frame, text="返回選單",
                           command=lambda: switch_callback("menu"))
     back_btn.pack(pady=10)
 

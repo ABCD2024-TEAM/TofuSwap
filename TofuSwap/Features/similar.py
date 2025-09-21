@@ -47,7 +47,7 @@ def create_similar_panel(parent, switch_callback):
     global entry, listbox, detail_label
     frame = tk.Frame(parent, bg="#f7f2e7")
 
-    title = tk.Label(frame, text="Similar",
+    title = tk.Label(frame, text="相似的食物",
              font=("Segoe UI", 40, "bold"),
              bg="#f7f2e7")
     title.pack(pady=10)
@@ -70,10 +70,10 @@ def create_similar_panel(parent, switch_callback):
     for item in first_column:
         listbox.insert(END, item)
         
-    find_similar_btn = ttk.Button(frame, text="Find Similar", command=lambda: show_similar())
+    find_similar_btn = ttk.Button(frame, text="尋找類似", command=lambda: show_similar())
     find_similar_btn.pack(pady=10)
 
-    back_btn = ttk.Button(frame, text="Back to Menu",
+    back_btn = ttk.Button(frame, text="返回選單",
                           command=lambda: switch_callback("menu"))
     back_btn.pack(pady=10)
 

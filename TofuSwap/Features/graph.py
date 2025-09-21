@@ -23,7 +23,7 @@ def create_graph_panel(parent, switch_callback):
     canvas.draw()
     canvas.get_tk_widget().pack(fill=tk.BOTH, expand=1, padx=10, pady=10)
 
-    back_btn = ttk.Button(frame, text="Back to Menu",
+    back_btn = ttk.Button(frame, text="返回選單",
                           command=lambda: switch_callback("menu"))
     back_btn.pack(pady=10)
 

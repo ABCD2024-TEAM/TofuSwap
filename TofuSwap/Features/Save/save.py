@@ -60,7 +60,7 @@ def create_save_panel(parent, switch_callback):
     def save_selected():
         selected = tree.selection()
         if not selected:
-            messagebox.showwarning("No Selection", "Please select a dish to save.")
+            messagebox.showwarning("無選擇", "請選擇要保存的菜餚")
             return
 
         newly_saved = 0
@@ -73,27 +73,27 @@ def create_save_panel(parent, switch_callback):
                 newly_saved += 1
 
         if newly_saved:
-            messagebox.showinfo("Saved", f"Saved {newly_saved} new dish(es).")
+            messagebox.showinfo("Saved", f"儲存了 {newly_saved} 道新菜餚")
             refresh()   # update the list immediately
         else:
-            messagebox.showinfo("No Change", "Selected dish(es) already saved.")
+            messagebox.showinfo("沒有變化", "Selected dish(es) already saved.")
 
-    ttk.Button(frame, text="Save Selected Dish", command=save_selected).pack(pady=5)
+    ttk.Button(frame, text="保存所選菜餚", command=save_selected).pack(pady=5)
 
     # Navigation buttons
     btn_frame = tk.Frame(frame, bg="#f7f2e7")
     btn_frame.pack(pady=10)
 
-    ttk.Button(btn_frame, text="See Saved Dishes",
+    ttk.Button(btn_frame, text="查看已保存的菜餚",
                command=lambda: switch_callback("viewSaved"))\
        .grid(row=0, column=0, padx=5)
 
-    ttk.Button(btn_frame, text="Get Recommendations",
+    ttk.Button(btn_frame, text="獲取推薦",
                command=lambda: switch_callback("recommend"))\
        .grid(row=0, column=1, padx=5)
 
     # Back button
-    ttk.Button(frame, text="Back to Menu",
+    ttk.Button(frame, text="返回選單",
                command=lambda: switch_callback("menu")).pack(pady=10)
 
     # Expose refresh so your main app can call it on every show

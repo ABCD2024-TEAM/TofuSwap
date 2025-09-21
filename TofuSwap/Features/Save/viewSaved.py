@@ -31,7 +31,7 @@ def create_viewSaved_panel(parent, switch_callback):
 
         if not saved:
             tk.Label(content,
-                     text="You have no saved dishes yet.\nTry saving some dishes!",
+                     text="未找到已保存的菜餚。\n請保存一些菜餚以獲取推薦。",
                      font=("Segoe UI", 14),
                      fg="#555555",
                      bg="#f7f2e7",
@@ -59,21 +59,21 @@ def create_viewSaved_panel(parent, switch_callback):
 
                 ingr = ", ".join(str(x).strip() for x in row.iloc[1:7])
                 tk.Label(info,
-                         text=f"Ingredients: {ingr}",
+                         text=f"原料: {ingr}",
                          font=("Segoe UI", 12),
                          anchor="w",
                          bg="#f7f2e7")\
                   .pack(fill="x")
 
                 tk.Label(info,
-                         text=f"Method: {row.iloc[7].strip()}",
+                         text=f"烹調方法: {row.iloc[7].strip()}",
                          font=("Segoe UI", 12),
                          anchor="w",
                          bg="#f7f2e7")\
                   .pack(fill="x")
 
                 tk.Label(info,
-                         text=f"Appearance: {row.iloc[8].strip()}",
+                         text=f"外貌: {row.iloc[8].strip()}",
                          font=("Segoe UI", 12),
                          anchor="w",
                          bg="#f7f2e7")\
@@ -91,14 +91,14 @@ def create_viewSaved_panel(parent, switch_callback):
                     return _rm
 
                 ttk.Button(dish_frame,
-                           text="Remove",
+                           text="消除",
                            command=make_rm(dish_name))\
                    .pack(side="right", padx=10)
 
     # call it once now
     refresh()
 
-    back_btn = ttk.Button(frame, text="Back to Save Dishes Menu",
+    back_btn = ttk.Button(frame, text="返回保存菜餚菜單",
                           command=lambda: switch_callback("save"))
     back_btn.pack(pady=10)
 

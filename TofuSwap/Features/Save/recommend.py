@@ -40,7 +40,7 @@ def create_recommendation_panel(parent, switch_callback):
 
         if not saved_dishes:
             tk.Label(content_frame,
-                    text="No saved dishes found.\nPlease save some dishes to get recommendations.",
+                    text="未找到已保存的菜餚。\n請保存一些菜餚以獲取推薦。",
                     font=("Segoe UI", 14),
                     bg="#f7f2e7",
                     fg="red").pack(pady=20)
@@ -87,25 +87,25 @@ def create_recommendation_panel(parent, switch_callback):
             method = best_row.iloc[7]
             appearance = best_row.iloc[8]
 
-            tk.Label(content_frame, text=f"Recommended Dish: {name}",
+            tk.Label(content_frame, text=f"推薦菜色: {name}",
                     font=("Segoe UI", 20, "bold"),
                     bg="#f7f2e7").pack(pady=10)
 
-            tk.Label(content_frame, text="Ingredients:",
+            tk.Label(content_frame, text="原料:",
                     font=("Segoe UI", 14, "underline"),
                     bg="#f7f2e7").pack()
             tk.Label(content_frame, text=", ".join(ingredients),
                     font=("Segoe UI", 12),
                     bg="#f7f2e7", wraplength=600, justify="left").pack(pady=5)
 
-            tk.Label(content_frame, text="Cooking Method:",
+            tk.Label(content_frame, text="烹調方法:",
                     font=("Segoe UI", 14, "underline"),
                     bg="#f7f2e7").pack()
             tk.Label(content_frame, text=method,
                     font=("Segoe UI", 12),
                     bg="#f7f2e7", wraplength=600, justify="left").pack(pady=5)
 
-            tk.Label(content_frame, text="Appearance:",
+            tk.Label(content_frame, text="外貌:",
                     font=("Segoe UI", 14, "underline"),
                     bg="#f7f2e7").pack()
             tk.Label(content_frame, text=appearance,
@@ -113,7 +113,7 @@ def create_recommendation_panel(parent, switch_callback):
                     bg="#f7f2e7", wraplength=600, justify="left").pack(pady=5)
         else:
             tk.Label(content_frame,
-                    text="No similar dishes found.",
+                    text="沒有找到類似的菜色",
                     font=("Segoe UI", 14),
                     bg="#f7f2e7",
                     fg="red").pack(pady=20)
@@ -124,7 +124,7 @@ def create_recommendation_panel(parent, switch_callback):
     # Add code above
 
 
-    back_btn = ttk.Button(frame, text="Back to Save Dishes Menu",
+    back_btn = ttk.Button(frame, text="返回保存菜餚菜單",
                           command=lambda: switch_callback("save"))
     back_btn.pack(pady=10)
 

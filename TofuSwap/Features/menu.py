@@ -68,10 +68,10 @@ def create_menu_panel(parent, switch_callback):
 
     # Buttons with icons
     buttons = [
-        ("Create Visualization of Ingredients", "graph"),
-        ("Finding Similar Foods", "similar"),
-        ("Saved Foods", "save"),
-        ("Credits", "credits")
+        ("建立食品成分圖表", "graph"),
+        ("尋找類似的食物", "similar"),
+        ("保存食物", "save"),
+        ("製作人員", "credits")
     ]
 
     for text, target in buttons:
