@@ -60,7 +60,7 @@ def create_menu_panel(parent, switch_callback):
 
     # Load icons (subsample to taste; try 2–4 for typical sizes)
     icons = {
-        "graph": tk.PhotoImage(file=graph_file_path).subsample(16, 16),
+        #"graph": tk.PhotoImage(file=graph_file_path).subsample(16, 16),
         "similar": tk.PhotoImage(file=search_file_path).subsample(16, 16),
         "save": tk.PhotoImage(file=save_file_path).subsample(16, 16),
         "credits": tk.PhotoImage(file=info_file_path).subsample(16, 16),
@@ -68,7 +68,7 @@ def create_menu_panel(parent, switch_callback):
 
     # Buttons with icons
     buttons = [
-        ("建立食品成分圖表", "graph"),
+        #("建立食品成分圖表", "graph"),
         ("尋找類似的食物", "similar"),
         ("保存食物", "save"),
         ("製作人員", "credits")
